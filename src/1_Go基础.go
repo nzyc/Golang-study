@@ -157,6 +157,7 @@ func main () {
 
 	/*
 		数组 slice
+		引用类型
 		定义
 			var arr []int
 		ps: 和声明数组 一样 只不过 少了长度
@@ -198,6 +199,31 @@ func main () {
 	fmt.Println(slice7)			// [0 1 2]
 	fmt.Println(slice8)			// [0 1 2 3 4 5 6 7 8 9]
 
+
+	/*
+		数组 map
+		引用类型
+		map 读取和设置 也类似 slice  通过 key 来操作  而 slice 的 index 是通过 int 类型 来操作的
+	*/
+	// 声明一个key是字符串，值为int的字典,这种方式的声明需要在使用之前使用 make初始化
+	var numbers map[string]int
+	// 使用 make 初始化
+	numbers = make(map[string]int)
+	numbers["one"] = 1
+	numbers["two"] = 2
+	numbers["three"] = 3
+	fmt.Println(numbers)		// map[one:1 two:2 three:3]
+	fmt.Println(numbers["two"])	// 2
+
+	// 第二种方式
+	rating := map[string]float32{"C":5, "Go":4.5, "Python":4.5, "C++":2 }
+	fmt.Println(rating)			// map[Python:4.5 C++:2 C:5 Go:4.5]
+
+	// 第三种方式
+	rating1 := make(map[string]int)
+	rating1["hello"] = 1
+	rating1["world"] = 2
+	fmt.Println(rating1)		// map[hello:1 world:2]
 
 
 }

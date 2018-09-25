@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main () {
+func main() {
 	// 1、每个原文件必须是 go 为后缀
 	// 2、go语言严格区分大小写
 	// 3、go 语句没有标点符号

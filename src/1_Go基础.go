@@ -12,20 +12,20 @@ func main () {
 		定义变量
 	*/
 	// 定义单个变量
-	var one1 int = 123				// 标准版
-	var one2 = 1234					// 根据值自动推导 (类型推导)	只能在 函数里边使用
-	one3 := 12345					// 类型推导	的简化版  		只能在 函数里边使用
-	fmt.Println(one1,one2,one3)
+	var one1 int = 123								// 标准版
+	var one2 = 1234									// 根据值自动推导 (类型推导)	只能在 函数里边使用
+	one3 := 12345									// 类型推导	的简化版  		只能在 函数里边使用
+	fmt.Println(one1,one2,one3)						// 123 1234 12345
 
 	// 定义多个变量
 	var two1, two2, two3 int
-	fmt.Println(two1,two2,two3)
+	fmt.Println(two1,two2,two3)						// 0 0 0
 
 	var two11, two22, two33 = 111,222,333
-	fmt.Println(two11,two22,two33)
+	fmt.Println(two11,two22,two33)					// 111 222 333
 
 	two111, two222,two333 := "aaa", "bbb","ccc"
-	fmt.Println(two111,two222,two333)
+	fmt.Println(two111,two222,two333)				// aaa bbb ccc
 
 
 	/*
@@ -33,16 +33,16 @@ func main () {
 	*/
 	// 跟定义变量一样 只不过 标识符不一样
 	const constName int =  123
-	fmt.Println(constName)
+	fmt.Println(constName)							// 123
 
 
 	/*
 		Boolean 布尔类型
 	*/
-	var isAction bool						// 标准版
-	var enabled, disabled = true, false		// 忽略类型声明
-	flag := true							// 自动推导类型
-	fmt.Println(isAction, enabled, disabled, flag)
+	var isAction bool								// 标准版
+	var enabled, disabled = true, false				// 忽略类型声明
+	flag := true									// 自动推导类型
+	fmt.Println(isAction, enabled, disabled, flag)	// false true false true
 
 
 	/*
@@ -70,16 +70,16 @@ func main () {
 		字符串
 		格式 使用 双引号 "" 或者 反引号 ``
 	*/
-	var str1 string	= "str1"		// 标准
-	var str2 = "str2"				// 简化
-	str3 := "str3"					// 自动推导类型
-	str4 := `str3`					// 自动推导类型
-	str5 := str3 + str4				// 使用 + 拼接字符串
-	fmt.Println(str1)
-	fmt.Println(str2)
-	fmt.Println(str3)
-	fmt.Println(str4)
-	fmt.Println(str5)
+	var str1 string	= "str1"			// 标准
+	var str2 = "str2"					// 简化
+	str3 := "str3"						// 自动推导类型
+	str4 := `str4`						// 自动推导类型
+	str5 := str3 + str4					// 使用 + 拼接字符串
+	fmt.Println(str1)					// str1
+	fmt.Println(str2)					// str2
+	fmt.Println(str3)					// str3
+	fmt.Println(str4)					// str4
+	fmt.Println(str5)					// str3str3
 
 
 	/*
@@ -88,7 +88,7 @@ func main () {
 	*/
 	err := errors.New("emit macho dwarf: elf header corrupted")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println(err)				// emit macho dwarf: elf header corrupted
 	}
 
 
@@ -97,22 +97,107 @@ func main () {
 	*/
 	var (
 		fenz1 = 100
-		fenz2 = 200
+		fenz2 int = 200
 		fenz3 = 300
 	)
 	const (
 		fenz4 = 400
-		fenz5 = 500
+		fenz5 int = 500
 		fenz6 = 600
 	)
-	fmt.Println(fenz1,fenz2,fenz3)
-	fmt.Println(fenz4,fenz5,fenz6)
+	fmt.Println(fenz1,fenz2,fenz3)		// 100 200 300
+	fmt.Println(fenz4,fenz5,fenz6)		// 400 500 600
 
 
 	/*
 		iota枚举
 		它的默认值是 0 const 没增加一行 就 加 1
+		iota 在同一行时 值相同
 	*/
+	const (
+		iota1 = iota
+		iota2 = iota
+		iota3 = iota
+		iota4,iota5,iota6 = iota,iota,iota
+		iota7 = iota
+		iota8
+		iota9		// 常亮 省略赋值操作的时候  默认与 前一个常量的值相同 所以 iota8 = iota iota9 = iota
+	)
+	fmt.Println(iota1,iota2,iota3,iota4,iota5,iota6,iota7,iota8,iota9)		// 0 1 2 3 3 3 4 5 6
+
+
+	/*
+		数组
+		定义：
+			var arr [n]type
+			n 是数组的类型， type 是 定义数组储存的类型
+	*/
+	var arr1 [10]int			// 定义一个长度为10 的int类型的数组
+	arr1[0] = 123				// 赋值操作 是从 0开始的
+	arr1[1] = 1234
+	fmt.Println(arr1)			// [123 1234 0 0 0 0 0 0 0 0]  其他没有赋值的全都是 int 的默认值 0
+
+	var arr2 = [3]int{1,2,3}	// 标准版	定义吃长度为三的数组 他的值分别 为 1，2，3
+	fmt.Println(arr2)
+
+	arr3 := [3]int {1,2,3}		// 简化版
+	fmt.Println(arr3)
+
+	arr4 := [...]int{1,2,3,4}	// 忽略长度 采用 ... 定义 go会自动根据元素的长度来计算长度
+	fmt.Println(arr4)
+
+	// 定义二维数组	该数组以俩个数组为元素，其中每个数组又有四个int类型的元素
+	arr5 := [2][4]int{[4]int{1,2,3,4},[4]int{5,6,7,8}}
+	fmt.Println(arr5)
+
+	// 二维数组 简化版
+	arr6 := [2][4]int{{1,2,3,4},{5,6,7,8}}
+	fmt.Println(arr6)			// [[1 2 3 4] [5 6 7 8]]
+
+
+	/*
+		数组 slice
+		定义
+			var arr []int
+		ps: 和声明数组 一样 只不过 少了长度
+			在初始定义数组时，我们并不知道需要多大的数组，因此我们就需要“动态数组”。在Go里面这种数据结构叫slice
+			slice并不是真正意义上的动态数组，而是一个引用类型。
+			slice总是指向一个底层array，slice的声明也可以像array一样，只是不需要长度。
+		注意:
+			slice 和 数组 的声明的区别
+			数组的声明 [] 里必须要有 长度 或者 ...
+			slice [] 里面没有任何字符
+		内置函数
+			len		获取slice长度
+			cap		获取slice的最大容量
+			append 	向slice里面追加一个或者多个元素，然后返回一个和slice一样类型的slice
+			copy 	函数copy从源slice的src中复制元素到目标dst，并且返回复制的元素的个数
+	*/
+	slice1 := []int{1,2,3,4,5}
+	fmt.Println(slice1)			// [1 2 3 4 5]
+
+	// slice 也可以 从 slice 中再次声明
+	var slice2 = [10]int{0,1,2,3,4,5,6,7,8,9}
+	// 声明俩个byte的 slice
+	var slice3,slice4 []int
+	// 进行截取
+	slice3 = slice2[3:5]
+	fmt.Println(slice3)			// [3 4]
+	// 进行截取
+	slice4 = slice2[4:6]
+	fmt.Println(slice4)			// [4 5]
+
+	// 简洁操作
+	slice5 := slice2[2:3]
+	slice6 := slice2[2:]		// [2:len(slice2)]
+	slice7 := slice2[:3]		// [0:3]
+	slice8 := slice2[:]			// [0:len(slice2)]
+
+	fmt.Println(slice5)			// [2]
+	fmt.Println(slice6)			// [2 3 4 5 6 7 8 9]
+	fmt.Println(slice7)			// [0 1 2]
+	fmt.Println(slice8)			// [0 1 2 3 4 5 6 7 8 9]
+
 
 
 }

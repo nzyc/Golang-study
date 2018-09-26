@@ -189,6 +189,11 @@ func main() {
 	fmt.Println(slice7) // [0 1 2]
 	fmt.Println(slice8) // [0 1 2 3 4 5 6 7 8 9]
 
+	// 内置函数的使用
+	fmt.Println(len(slice8))	// 10
+	fmt.Println(cap(slice8))	// 10
+	fmt.Println(append(slice8, 999))		// [0 1 2 3 4 5 6 7 8 9 999]
+
 	/*
 		数组 map
 		引用类型

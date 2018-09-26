@@ -106,7 +106,7 @@ Here:
 		defer 会在main函数执行完毕时执行 遵循一个 原则 后进先出
 	*/
 	for i := 0; i < 5; i++ {
-		defer fmt.Printf("%d ", i)  // 4 3 2 1 0
+		defer fmt.Printf("这块是=defer=过的%d ", i)  // 4 3 2 1 0
 	}
 	fmt.Println("")
 
@@ -118,8 +118,13 @@ Here:
 		好处：
 			这样就可以吧这个类型的函数当做值来传递
 	*/
-	type testInt func(int) bool		// 声明一个函数类型
-	
+	// 例子 使用 函数的声明写一个 过滤奇数偶数的 程序
+	slice := []int{1,2,3,4,5,6,7,8,9,0}
+	odd := filter(slice,isOdd)
+	fmt.Println(odd)
+	event := filter(slice,isEvent)
+	fmt.Println(event)
+
 
 
 }
@@ -152,3 +157,37 @@ func funcSix(solid *int) int {
 	*solid++
 	return *solid
 }
+
+/*
+	例子 使用 函数的声明写一个 过滤奇数偶数的 程序
+*/
+type testIntType func (int) bool
+
+// 添加同类型的函数
+func isOdd (integer int) (bool) {
+	if integer % 2 == 0 {
+		return false
+	} else {
+		return true
+	}
+}
+
+func isEvent (integer int) (bool) {
+	if integer % 2 == 0 {
+		return true
+	} else {
+		return false
+	}
+}
+
+func filter (slice []int, fn testIntType) (result []int) {
+	for _,value := range slice{
+		if fn(value) {
+			result = append(result,value)
+		}
+	}
+	return
+}
+
+
+

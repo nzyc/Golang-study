@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
 
 func main() {
 
@@ -13,7 +16,6 @@ func main() {
 		fmt.Println("这里是1")
 	} else if ifOne == 2 {
 		fmt.Println("这里是2")
-
 	} else {
 		fmt.Println("这里是其他")
 	}
@@ -126,6 +128,66 @@ Here:
 	fmt.Println(event)
 
 
+	/*
+		main init 函数
+		Go在定义这俩个函数的时候 这俩个函数没有任何参数 和返回值
+		每个 package 里面可以有多个 init 函数 但是 为了容易维护 还是一个函数里面有一个init函数
+
+		Go会自动调取 main 和 init 这俩个函数
+		package 里面的init 都是可选的 但是 必须要有main 函数
+	*/
+
+
+
+	/*
+		import
+		导入包
+	*/
+	// import "fmt"
+
+	// 相对路径 导入包
+	// import "./module"	// 与当前文件 同一目录下的module 包
+
+	// 导入绝对路径
+	// import "shorturl/model"	// 加载  src 下面的 shorturl/model  src/shorturl/model
+
+	/*
+		点操作 导入包
+		import (
+			. "fmt"
+		)
+		这样我们 就可以不用
+		fmt.Println()
+		直接写成
+		Println()
+	*/
+
+
+	/*
+		别名操作 导入包
+		import (
+			f "fmt"
+		)
+		这样我们 就可以不用
+		fmt.Println()
+		直接写成
+		f.Println()
+	*/
+
+
+	/*
+		_ 操作 导入包
+		import (
+			_ "fmt"
+		)
+		这个 导入包的意思是  不使用包内 的 函数 而是使用 包里的 init函数
+
+	*/
+
+
+
+
+
 
 }
 
@@ -188,6 +250,3 @@ func filter (slice []int, fn testIntType) (result []int) {
 	}
 	return
 }
-
-
-

@@ -11,9 +11,21 @@ type person struct {
 	age  int
 }
 
+/*
+	匿名的struct
+*/
+type Human struct {
+	name   string
+	age    int
+	weight int
+}
+type Student struct {
+	Human // 匿名字段，那么默认Student就包含了Human的所有字段
+	name string
+	speciality string
+}
 
 func main() {
-
 
 	// 简单使用
 	var P person
@@ -37,29 +49,35 @@ func main() {
 	structThree := person{"miya", 24}
 
 	// 比大小
-	obj1, num1:= older(structOne, structTwo)
-	obj2, num2:= older(structThree, structTwo)
-	fmt.Println(obj1,num1)
-	fmt.Println(obj2,num2)
-
-
+	obj1, num1 := older(structOne, structTwo)
+	obj2, num2 := older(structThree, structTwo)
+	fmt.Println(obj1, num1)
+	fmt.Println(obj2, num2)
 
 	/*
 		struct 匿名字段
 	*/
-
-
+	// 我们初始化一个学生
+	mark := Student{Human{"Mark", 25, 120}, "mars","Computer Science"}
+	fmt.Println(mark)            // {{Mark 25 120} Computer Science}
+	fmt.Println(mark.name)       // Mark
+	fmt.Println(mark.speciality) // Computer Science
+	mark.Human = Human{"Andy", 30, 180}
+	fmt.Println(mark)            // {{Andy 30 180} Computer Science}
+	fmt.Println(mark.Human)      // {Andy 30 180}
+	fmt.Println(mark.Human.name) // Andy
+	fmt.Println(mark.name)       // mars
 
 }
 
-func older(one, two person) (person,int) {
+func older(one, two person) (person, int) {
 	if one.age > two.age {
 		var diffNum = one.age - two.age
 		return one, diffNum
-	} else if one.age < two.age  {
+	} else if one.age < two.age {
 		var diffNum = two.age - one.age
 		return two, diffNum
 	} else {
-		return one,123
+		return one, 123
 	}
 }

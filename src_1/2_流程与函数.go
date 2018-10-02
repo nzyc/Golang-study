@@ -149,7 +149,7 @@ Here:
 	// import "./module"	// 与当前文件 同一目录下的module 包
 
 	// 导入绝对路径
-	// import "shorturl/model"	// 加载  src 下面的 shorturl/model  src/shorturl/model
+	// import "shorturl/model"	// 加载  src_1 下面的 shorturl/model  src_1/shorturl/model
 
 	/*
 		点操作 导入包

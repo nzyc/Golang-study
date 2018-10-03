@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type Human struct {
 	name  string
@@ -43,6 +46,19 @@ type Men interface {
 	Sing(lyrics string)
 }
 
+type Element interface{}
+type List [] Element
+
+type Person struct {
+	name string
+	age  int
+}
+
+//定义了String方法，实现了fmt.Stringer
+func (p Person) String() string {
+	return "(name: " + p.name + " - age: " + strconv.Itoa(p.age) + " years)"
+}
+
 func main() {
 	mike := Student{Human{"Mike", 25, "222-222-XXX"}, "MIT", 0.00}
 	paul := Student{Human{"Paul", 26, "111-222-XXX"}, "Harvard", 100}
@@ -73,4 +89,38 @@ func main() {
 	for _, value := range x {
 		value.SayHi()
 	}
+
+	fmt.Println("====================================")
+	/*
+		空的 interface
+		他不包含任意类型的 method 所以他可以储存任意类型
+	*/
+
+	var asdf interface{}
+	var number int = 5
+	//s := "hello world"
+	asdf = number
+	//asdf = s
+	fmt.Println(asdf)
+
+	age := 97
+	fmt.Println(strconv.Itoa(age))
+
+	list := make(List, 3)
+	list[0] = 1       // an int
+	list[1] = "Hello" // a string
+	list[2] = Person{"Dennis", 70}
+
+	for index, element := range list {
+		if value, ok := element.(int); ok {
+			fmt.Printf("list[%d] is an int and its value is %d\n", index, value)
+		} else if value, ok := element.(string); ok {
+			fmt.Printf("list[%d] is a string and its value is %s\n", index, value)
+		} else if value, ok := element.(Person); ok {
+			fmt.Printf("list[%d] is a Person and its value is %s\n", index, value)
+		} else {
+			fmt.Printf("list[%d] is of a different type\n", index)
+		}
+	}
+
 }

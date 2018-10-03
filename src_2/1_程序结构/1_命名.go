@@ -21,9 +21,15 @@ func main() {
 		byte	rune		string		bool		uintptr
 
 		内建函数
-		make	len		cap		new		append		copy
-		close	delete	complex	real	image		panic
-		recover
+		close					用于channel通讯,使用它来关闭channel
+		delete					用于删除map中的实例
+		len和cap					可用于不同类型 len 返回长度 cap 返回详细信息
+		new						用于不同类型的内存分配
+		make					用于内建模型 map slice channel 的内存分配
+		copy					用于复制slice
+		panic 和 recover			用于异常处理机制
+		print 和 println			打印函数，用于调试
+		complex、real 和 imag	全部用于处理 复数
 	*/
 
 	/*

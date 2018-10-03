@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"unicode/utf8"
 )
 
 func main() {
@@ -119,6 +120,7 @@ func main() {
 
 	/*
 		数组
+		不是引用类型
 		定义：
 			var arr [n]type
 			n 是数组的类型， type 是 定义数组储存的类型
@@ -190,9 +192,9 @@ func main() {
 	fmt.Println(slice8) // [0 1 2 3 4 5 6 7 8 9]
 
 	// 内置函数的使用
-	fmt.Println(len(slice8))	// 10
-	fmt.Println(cap(slice8))	// 10
-	fmt.Println(append(slice8, 999))		// [0 1 2 3 4 5 6 7 8 9 999]
+	fmt.Println(len(slice8))         // 10
+	fmt.Println(cap(slice8))         // 10
+	fmt.Println(append(slice8, 999)) // [0 1 2 3 4 5 6 7 8 9 999]
 
 	/*
 		数组 map
@@ -219,4 +221,70 @@ func main() {
 	rating1["world"] = 2
 	fmt.Println(rating1) // map[hello:1 world:2]
 
+	/*
+		小练习
+	*/
+	// 1
+	for i := 1; i <= 10; i++ {
+		fmt.Println("第一种---", i)
+	}
+
+	// 2
+	ii := 1
+Herr:
+	fmt.Println("第二种---", ii)
+	ii++
+	if ii <= 10 {
+		goto Herr
+	}
+
+	// 3
+	var arrone = [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	for i := 0; i <= len(arrone); i++ {
+		fmt.Println("第三种---", arrone[i-1])
+	}
+
+	// 4
+	for i := 1; i <= 100; i++ {
+		if i % 3 == 0 && i % 5 == 0 {
+			fmt.Println("FizzBuzz ---", i)
+		} else if i % 3 == 0 {
+			fmt.Println("Fizz ---",i)
+		} else if i % 5 == 0 {
+			fmt.Println("Buzz ---",i)
+		} else {
+			fmt.Println(i)
+		}
+	}
+
+	// 5
+	for i:=1;i<=100;i++{
+		for k:=1;k<=i;k++{
+			fmt.Print("A")
+		}
+		fmt.Println("")
+	}
+	strone := "A"
+	for i:=0;i<=100 ;i++  {
+		fmt.Println(strone)
+		strone += "A"
+	}
+
+	// 6
+
+	str := "hello"
+	b := []byte(str)
+	fmt.Println(b)
+
+	strtwo := "dsjkdshdjsdh....js"
+	fmt.Printf("String %s\nLength: %d, Runes: %d\n", strtwo, len([]byte(strtwo)), utf8.RuneCount([]byte(strtwo)))
+
+
+	// 7
+	s := "foobar"
+	a := []rune(s)
+	for i,j:=0, len(a)-1; i<j; i,j=i+1,j-1 {
+		a[i], a[j] = a[j], a[i]
+		fmt.Printf("%s\n", string(a))
+	}
 }
